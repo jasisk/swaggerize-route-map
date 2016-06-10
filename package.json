@@ -1,0 +1,15 @@
+{
+  "name": "swaggerize-route-map",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Jean-Charles Sisk <jasisk@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^1.1.3"
+  }
+}
