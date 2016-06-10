@@ -1,8 +1,13 @@
+var Table = require('cli-table');
 var Chalk = require('chalk');
+
 var exists = '[' + Chalk.green('✓') + ']';
 var notExists = '[' + Chalk.red('x') + ']';
 
 module.exports = function buildMap(swagger) {
+  var table = new Table({
+    head: ['Route', 'Methods']
+  });
   var paths = swagger.api.paths;
   var map = Object.keys(paths).reduce(function (accum, path) {
     var methods = paths[path];
@@ -17,9 +22,12 @@ module.exports = function buildMap(swagger) {
     map[route.path][route.method] = true;
   });
 
-  console.log(Object.keys(map).map(function (route) {
-    return route + ': ' + Object.keys(map[route]).map(function (method) {
+  table.push.apply(table, Object.keys(map).map(function (route) {
+    var methods = Object.keys(map[route]).map(function (method) {
       return method + ' ' + (map[route][method] ? exists : notExists);
     }).join(', ');
-  }).join('\n'));
+    return [route, methods];
+  }));
+
+  console.log(table.toString());
 }
